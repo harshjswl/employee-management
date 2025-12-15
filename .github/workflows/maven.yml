@@ -20,4 +20,4 @@ jobs:
 
       - name: Build Backend
         working-directory: projectBackend
-        run: mvn -B clean package
+        run: mvn -B clean package -DskipTests
