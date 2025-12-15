@@ -1,4 +1,4 @@
-name: Deploy 3-Tier App to EC2
+name: Maven 3-Tier App to EC2
 
 on:
   push:
@@ -37,6 +37,8 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           source: "."
           target: "/home/ubuntu/employee-management"
+          debug: true
+
 
       - name: Start Backend App
         uses: appleboy/ssh-action@v1.0.3
