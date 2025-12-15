@@ -18,7 +18,7 @@ const EditEmployee = () => {
 
   const loadEmployee = async () => {
     try {
-      const res = await axios.get(`http://localhost:8080/employees/findbyid/${empId}`);
+      const res = await axios.get(`http://3.6.126.70:8080/employees/findbyid/${empId}`);
       setEmployee(res.data);
     } catch (err) {
       alert("Failed to fetch employee data.");
@@ -31,7 +31,7 @@ const EditEmployee = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    await axios.put(`http://localhost:8080/employees/update/${empId}`, employee);
+    await axios.put(`http://3.6.126.70:8080/employees/update/${empId}`, employee);
     navigate('/');
   };
 
