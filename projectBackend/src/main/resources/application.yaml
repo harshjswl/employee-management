@@ -5,9 +5,6 @@ spring:
     username: empuser
     password: password
   jpa:
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto: update
     show-sql: true
