@@ -19,5 +19,5 @@ jobs:
           cache: maven
 
       - name: Build Backend
-        working-directory: employee-management-backend
+        working-directory: projectBackend
         run: mvn -B clean package
