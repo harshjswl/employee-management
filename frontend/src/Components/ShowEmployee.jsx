@@ -54,7 +54,7 @@ const ShowEmployee = () => {
                       className="btn btn-danger btn-sm"
                       onClick={() => deleteEmployee(employee.empId)}
                     >
-                      Delete
+                      Remove
                     </button>
                   </td>
                 </tr>
