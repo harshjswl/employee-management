@@ -10,13 +10,13 @@ const ShowEmployee = () => {
   }, []);
 
   const loadEmployees = async () => {
-    const result = await axios.get("http://localhost:8080/employees/findall");
+    const result = await axios.get("http://3.6.126.70:8080/employees/findall");
     setEmployees(result.data);
   };
 
   const deleteEmployee = async (empId) => {
     if (window.confirm("Are you sure you want to delete this employee?")) {
-      await axios.delete(`http://localhost:8080/employees/deletebyid/${empId}`);
+      await axios.delete(`http://3.6.126.70:8080/employees/deletebyid/${empId}`);
       loadEmployees(); // refresh list
     }
   };
