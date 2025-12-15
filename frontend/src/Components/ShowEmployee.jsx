@@ -70,9 +70,9 @@ const ShowEmployee = () => {
       </div>
       <div className="d-flex justify-content-between align-items-center mb-3">
         <h3 className="text-primary">Employee List</h3>
-         <Link to="/addemployee" className="btn btn-success">
-          + Add Employee
-        </Link>
+         <Link to="/addemployee" className="btn btn-success btn-lg"> 
+           + Add Employee
+         </Link>
 </div>
 
     </div>
