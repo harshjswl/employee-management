@@ -19,6 +19,11 @@ public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 
+     @GetMapping("/hello")
+    public String hello() { 
+        return "Hello i am fine";
+    }
+
     @PostMapping("/save")
     public ResponseEntity<Employee>save(@RequestBody Employee employee){
         log.info("@@@@@@Trying to save data for Employee: "+ employee.getEmpName());
