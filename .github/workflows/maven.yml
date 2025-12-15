@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1️⃣ Checkout code
+      # 1️⃣ Get code from GitHub
       - name: Checkout Code
         uses: actions/checkout@v4
 
@@ -21,19 +21,31 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
-      # 3️⃣ Build Backend
+      # 3️⃣ Build Backend (Spring Boot)
       - name: Build Backend
         working-directory: projectBackend
         run: mvn clean package -DskipTests
 
-      # 4️⃣ Build Frontend
+      # 4️⃣ Setup Node
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      # 5️⃣ Build Frontend (Vite)
       - name: Build Frontend
         working-directory: frontend
         run: |
           npm install
           npm run build
 
-      # 5️⃣ Copy only required files to EC2
+      # 6️⃣ Debug (IMPORTANT – keeps SCP safe)
+      - name: Debug files
+        run: |
+          ls -R projectBackend/target
+          ls -R frontend/dist
+
+      # 7️⃣ Copy ONLY required files to EC2
       - name: Copy files to EC2
         uses: appleboy/scp-action@v0.1.4
         with:
@@ -42,17 +54,17 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           source: |
             projectBackend/target/projectBackend-0.0.1-SNAPSHOT.jar
-            frontend/dist
+            frontend/dist/**
           target: /home/ubuntu/employee-management
+          overwrite: true
 
-      # 6️⃣ Restart backend using systemd (CORRECT WAY)
+      # 8️⃣ Restart backend using systemd (BEST PRACTICE)
       - name: Restart Backend Service
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SSH_KEY }}
-          script_stop: false
           script: |
             sudo systemctl restart projectBackend
             sudo systemctl status projectBackend --no-pager
