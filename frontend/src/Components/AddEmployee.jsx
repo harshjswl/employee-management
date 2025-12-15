@@ -19,7 +19,7 @@ const AddEmployee = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    await axios.post("http://localhost:8080/employees/save", employee);
+    await axios.post("http://3.6.126.70:8080/employees/save", employee);
     navigate('/');
   };
 
